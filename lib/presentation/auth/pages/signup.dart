@@ -12,9 +12,9 @@ import '../../../service_locator.dart';
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
 
-  TextEditingController _fullName = TextEditingController();
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
+  final TextEditingController _fullName = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

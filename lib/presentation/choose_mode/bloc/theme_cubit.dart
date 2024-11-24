@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-class ThemeCubit extends HydratedCubit<ThemeMode>{
+class ThemeCubit extends HydratedCubit<ThemeMode> {
   ThemeCubit() : super(ThemeMode.system);
 
   //Este metodo toma el tema por paramtetro y lo inserta en el estado ThemeMode
@@ -9,16 +9,15 @@ class ThemeCubit extends HydratedCubit<ThemeMode>{
 
   @override
   ThemeMode? fromJson(Map<String, dynamic> json) {
-    // TODO: implement fromJson
+    return null;
 
+    // TODO: implement fromJson
   }
 
   @override
   Map<String, dynamic>? toJson(ThemeMode state) {
+    return null;
+
     // TODO: implement toJson
-
   }
-
-
-  
 }

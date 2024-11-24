@@ -4,6 +4,8 @@ import 'package:spotify/common/helpers/is_dark_mode.dart';
 import 'package:spotify/common/widgets/appbar/app_bar.dart';
 import 'package:spotify/core/configs/assets/app_images.dart';
 import 'package:spotify/core/configs/theme/app_colors.dart';
+import 'package:spotify/presentation/home/widgets/news_songs.dart';
+import 'package:spotify/presentation/home/widgets/play_list.dart';
 
 import '../../../core/configs/assets/app_vectors.dart';
 
@@ -25,6 +27,13 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: BasicAppBar(
@@ -35,10 +44,8 @@ class _HomePageState extends State<HomePage>
             height: 40,
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [_homeTopCard(), _tabs()],
-          ),
+        body: Column(
+          children: [_homeTopCard(), _tabs(),_tabBarView()],
         ));
   }
 
@@ -50,7 +57,7 @@ class _HomePageState extends State<HomePage>
             children: [
               Align(
                 alignment: Alignment.bottomCenter,
-                child: SvgPicture.asset(AppVectors.homeTopCard),
+                child: SvgPicture.asset(AppVectors.homeTopCard,width: 370,),
               ),
               Align(
                 alignment: Alignment.bottomRight,
@@ -67,10 +74,12 @@ class _HomePageState extends State<HomePage>
   Widget _tabs() {
     return TabBar(
       controller: _tabController,
-      //isScrollable: true,
+      isScrollable: true,
+      padding: const EdgeInsets.only(top: 20),
       indicatorColor: AppColors.primary,
       labelColor: context.isDarkMode ? Colors.white : Colors.black,
-      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 16),
+      tabAlignment: TabAlignment.center,
+      dividerHeight: 0,
       tabs: const [
         Text(
           "News",
@@ -83,6 +92,25 @@ class _HomePageState extends State<HomePage>
         Text("Podcast",
             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
       ],
+    );
+  }
+
+  Widget _tabBarView(){
+    return Expanded(
+      child: TabBarView(
+        controller: _tabController,
+        children: const [
+          Column(
+              children: [
+                NewsSongs(),
+                PlayList()
+              ]
+          ),
+          Center(child: Text('Contenido de Videos')),
+          Center(child: Text('Contenido de Artist')),
+          Center(child: Text('Contenido de Podcast')),
+        ],
+      ),
     );
   }
 }
